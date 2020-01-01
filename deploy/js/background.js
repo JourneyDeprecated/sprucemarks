@@ -27,6 +27,7 @@ var s = { // s is short for Sprucemarks
     'delay_timer': '', // used to keep track of one setTimeout call when the option create_delay is enabled and a bookmark onCreate event has happened
     'log': false, // make sure this is false when publishing to the chrome web store
     'new_options': false, // will be set to true if new options are available
+    'show_notification': false, // set to true to show the latest notification in the notify directory
     'status': {
         'import_active'   : false, // true if bookmarks are actively being imported
         'listeners_active': false, // true if maintenance listeners are active
@@ -285,6 +286,9 @@ s.install_or_upgrade = async function s_install_or_upgrade() {
             await storageSet({'option_mobile_bookmarks_sort'    : s.defaults.option_mobile_bookmarks_sort})
             await storageSet({'option_mobile_bookmarks_sub_sort': s.defaults.option_mobile_bookmarks_sub_sort})
             s.new_options = true
+
+            // show notification
+            s.show_notification = true
         } else {
             // check for upgrade tasks
             var messageUpgrade = 'Upgrade task for versions less than: '
@@ -358,6 +362,20 @@ s.install_or_upgrade = async function s_install_or_upgrade() {
                 // so long, and thanks for all the fish
                 localStorage.clear()
             }
+
+            check_version = '2019.12.1.0'
+            if (local_version_less_than(local_version, check_version)) {
+                log(messageUpgrade + check_version)
+                // show notification
+                s.show_notification = true
+            }
+        }
+
+        if (s.show_notification) {
+            // show latest notification
+            chrome.tabs.create({
+                url: '/notify/2019-december.html'
+            })
         }
 
         // update the storage version for next time

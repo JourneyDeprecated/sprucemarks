@@ -14,9 +14,9 @@ body * {
     width: 750px;
 }
 a {
-    color: #3e94d6;
+    color: #2e97e8;
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
 }
 a:hover,
 a:focus {
@@ -85,14 +85,24 @@ button {
     font-size: 14px;
     margin-left: 179px;
 }
-.content {
-    font-size: 1.35em;
-}
 .content,
 .option {
     clear: both;
     margin: 0 0 18px 0;
     padding: 0 0 18px 0;
+}
+.content {
+    font-size: 1.45em;
+    line-height: 1.3;
+    padding: 0 0 0 19px;
+}
+.content h1 {
+    font-size: 32px;
+    margin-top: -8px;
+}
+.content p {
+    margin: 1.4em 0 0 0;
+    max-width: 575px;
 }
 .content,
 .option,
@@ -187,6 +197,15 @@ button {
     margin: 7px 0 0 15px;
     opacity: 0;
     text-align: left;
+}
+#upcoming-changes {
+    font-size: 1.5em;
+    position: absolute;
+    right: 7px;
+    top: 68px;
+}
+#save-button {
+    text-decoration: none !important;
 }
 @-webkit-keyframes savedAnimation {
     0%   { opacity: 0; }
